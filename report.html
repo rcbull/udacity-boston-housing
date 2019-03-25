@@ -13669,6 +13669,7 @@ Desvio padrão dos preços: $165,171.13
 <p><strong>Resposta: </strong></p>
 <p>O gráfico com profundidade 3 é o que apresenta melhor convergência entre as curvas, sendo que a curva de treinamento vai caindo com aumento no número de pontos e a curva de teste vai subindo até convergirem com aproximadamente 300 pontos.</p>
 <p>Se forem adicionados mais pontos a tendência é melhorar o resultado, mas há um limite onde o número de pontos pode gerar <em>overfitting</em>, ou seja, pode gerar um afastamento das curvas.</p>
+<p>Considerando a <strong>profundidade máxima de 1</strong>, o modelo não representa adequadamente o padrão que devemos aprender, com o score próximo de 0,5, ou seja, tem resultado ruim com os dados de treinamento e também com os dados de teste. Enquanto a <strong>profundidade máxima de 10</strong>, mostra que o modelo se ajusta bem aos dados de treinamento (valores de score próximos de 1,0), mas não tem bom resultado com novos dados, o que fica evidente com o score baixo para série de dados de teste (<em>testing score</em>) .</p>
 
 </div>
 </div>
@@ -13809,16 +13810,14 @@ Desvio padrão dos preços: $165,171.13
 <p>A técnica de validação cruzada k-fold permite avaliar a capacidade de generalização do modelo (capacidade de se ajustar a dados externos) a partir de um determinado conjunto de dados, sendo que valor k o número de subconjuntos.</p>
 <p>Essa técnica consiste em:</p>
 <ol>
-<li><p>dividir o subconjunto de treinamento original em k subconjuntos iguais. Sendo que cada subcojunto é chamado de fold e varia de 1 até k</p>
+<li><p>Dividir o conjunto de dados de tamanho n, em k subconjuntos distintos (subconjuntos mutuamente exclusivos e de mesmo tamanho) com tamanho de n/k</p>
 </li>
-<li><p>para cada i = 1 até i = k:</p>
+<li><p>O algoritmo é treinamento k vezes para cada conjunto de dados diferente, sendo deixado sempre 1 conjunto (k -1) para fazer a validação. Esse conjunto separado é chamado de conjunto de treinamento de validação cruzada.</p>
+</li>
+<li><p>Após terminar as k interações, o desempenho é estimado como sendo o erro médio ou a taxa de acerto média sobre os k conjuntos de validação. Dessa forma o treinamento fica menos dependente de uma porção específica dos dados e indica de forma mais equilibrada o desempenho do modelo.</p>
 </li>
 </ol>
-<ul>
-<li>manter a dobra fi como conunto de validação e manter as demais dobras no conjunto de treinamento de validação</li>
-<li>treinar o modelo usando o conjunto de validação cruzada e calcular a precisão do modelo, validando seu resultado em relação ao conjunto de validação</li>
-<li>estimar a precisão do modelo, calculando o valor médio das precisões obtidas em todos os k casos de validação cruzada</li>
-</ul>
+<p>A validação cruzada é uma técnica que se adapta bem a grandes conjuntos de dados e evita de certa forma os problemas de sobreajuste e subajuste.</p>
 
 </div>
 </div>
